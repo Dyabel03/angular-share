@@ -1,7 +1,42 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "my-share": {
+      "projectType": "library",
+      "root": "projects/my-share",
+      "sourceRoot": "projects/my-share/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/my-share/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/my-share/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/my-share/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-share/src/test.ts",
+            "tsConfig": "projects/my-share/tsconfig.spec.json",
+            "karmaConfig": "projects/my-share/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-share"
 }
